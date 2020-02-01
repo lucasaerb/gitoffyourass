@@ -34,16 +34,13 @@ const getTimeLeftMs = () => {
 }
 
 const onAlarm = alarm => {
-  console.log(alarm)
   chrome.alarms.clear("second")
   decrementTime()
   const timeLeft = getTimeLeftMs()
-  console.log(timeLeft)
   if (timeLeft === 0){
-      console.log("DONE!")
       chrome.runtime.sendMessage({done: true})
       localStorage.setItem('cancel', false)
-      // chrome.tabs.create({url: 'index.html'});
+      chrome.tabs.create({url: 'index.html'});
       return;
   }
   chrome.runtime.sendMessage({updateTime: true})

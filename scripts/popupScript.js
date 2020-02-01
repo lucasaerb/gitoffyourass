@@ -69,7 +69,6 @@ const onStart = event => {
     localStorage.setItem('permminutes', m)
     localStorage.setItem('permseconds', s)
     localStorage.setItem('cancel', true)
-    console.log(h,":",m,":",s)
     cancel.className = "button"
     start.className = "button disabled"
     text.innerHTML = "GET READY TO WORK!!"
