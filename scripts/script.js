@@ -2,7 +2,7 @@
 
 let classifier;
 // Model URL
-let imageModelURL = 'https://storage.googleapis.com/tm-model/7SX5ZKcp/model.json';
+let imageModelURL = 'https://storage.googleapis.com/tm-model/7SX5ZKcp/';
 
 // Video
 let video;
