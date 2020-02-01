@@ -1,9 +1,40 @@
-body{
+* {
+   --mainWhite: #FFF;
+   --offWhite: #E8EAED;
+}
+
+head {
+    display: none;
     margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: var(--offWhite);
+    margin: 0;
+    padding: none;
     display: flex;
 
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+.navbar {
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 40px;
+    background-color: var(--mainWhite);
+    text-align: center;
+    /* border-radius:  10px; */
+}
+
+.navbar .title {
+    font-size: 4vw;
+    
 }
 
 .container {
@@ -22,15 +53,16 @@ body{
 }
 
 .left {
-    padding: 10px;
+    /* padding: 10px; */
     /* padding: -5px; */
     display: flex;
+    overflow: hidden;
     /* flex-basis: auto; */
 
     /* align-items: stretch; */
     /* flex-grow: 3; */
     /* display: flex; */
-    background-color:purple;
+    /* background-color: var(--mainWhite); */
     width: 80%;
     height: 90%;
     min-width: 600px;
@@ -50,27 +82,39 @@ body{
     flex-direction: column;
     /* width: 30%; */
     height: 90%;
+    width: 30%;
     min-width: 300px;
 
-    background-color: bisque;
+    background-color: var(--mainWhite);
 
     justify-content: space-evenly;
     align-items: center;
 
 }
 .rightVideo {
+    display: flex;
+    overflow: hidden;
     margin: 10px 10px 5px 10px;
     /* margin: 12px 10px; */
-    background-color: blue;
+    /* background-color: blue; */
     width: 95%;
-    flex-grow: 1;
+    height: 300px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
 }
 
 .rightCounter {
+    display: flex;
+    flex-direction: column;
     margin: 5px 10px 10px 10px;
     /* margin: 12px 10px; */
-    background-color: crimson;
+    /* background-color: crimson; */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     width: 95%;
+    /* height: 45%; */
     /* height: 50%; */
     flex-grow: 1;
 }
@@ -81,6 +125,17 @@ body{
     transition: 0.3s;
   }
 
+#rightVideo > video {
+    height: 300px !important;
+}
+
+#numberDisplay {
+    font-size: 15vw;
+}
+
+#numberComment {
+    font-size: 3vw;
+}
 
 .margin {
     margin: 10px;

@@ -14,14 +14,31 @@ let height;
 let width;
 let ratio = 0.75;
 
-// Load the model first
-function preload() {
-    classifier = ml5.imageClassifier(imageModelURL + 'model.json');
-}
+let vid;
+let vidHeight;
+let vidWidth;
+
+
 
 function getCanvasDimension(){
-    width = document.getElementById('canvas').clientWidth - 20;
-    height = width* ratio;
+    width = document.getElementById('canvas').clientWidth;
+    height = width* ratio - 20;
+    
+
+}
+
+function getVideoDimension(){
+    vidWidth = document.getElementById('rightVideo').clientWidth * 2 - 25;
+    vidHeight = width * ratio;
+}
+
+function setNumberDisplay(number, message){
+    document.getElementById('numberDisplay').innerHTML = number;
+    document.getElementById('numberComment').innerHTML = message;
+}
+
+function preload() {
+    classifier = ml5.imageClassifier(imageModelURL + 'model.json');
 }
 
 function setup() {
@@ -33,20 +50,38 @@ function setup() {
     // Create the video
     video = createCapture(VIDEO);
     video.size(width, height - 21);
-
     video.hide();
-
     flippedVideo = ml5.flipImage(video);
+
+    
+    getVideoDimension();
+    vid = createVideo(
+        ['assets/video/shia.mp4'],
+        vidLoad
+    );
+
+    vid.parent("rightVideo");
+    vid.size(vidWidth, vidHeight);
+    document.getElementById('canvas').style.height = vidHeight - 40;
+
     // Start classifying
     classifyVideo();
     windowResized();
 }
 
+function vidLoad() {
+    vid.loop();
+    vid.volume(0);
+}
 
 function windowResized() {
     getCanvasDimension();
+    getVideoDimension();
     resizeCanvas(width, height);
+
     video.size(width, height - 21);
+    vid.size(vidWidth, vidHeight);
+    document.getElementById('canvas').style.height = vidHeight - 40;
 }
 
 function draw() {
@@ -80,3 +115,4 @@ function gotResult(error, results) {
     // Classifiy again!
     classifyVideo();
 }
+
