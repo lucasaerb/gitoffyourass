@@ -10,21 +10,43 @@ let flippedVideo;
 // To store the classification
 let label = "";
 
+let height;
+let width;
+let ratio = 0.75;
+
 // Load the model first
 function preload() {
     classifier = ml5.imageClassifier(imageModelURL + 'model.json');
 }
 
+function getCanvasDimension(){
+    width = document.getElementById('canvas').clientWidth - 20;
+    height = width* ratio;
+}
+
 function setup() {
-    createCanvas(320, 260);
+
+    getCanvasDimension();
+    var myCanvas = createCanvas(width, height);
+    myCanvas.parent("canvas");
+
     // Create the video
     video = createCapture(VIDEO);
-    video.size(320, 240);
+    video.size(width, height - 21);
+
     video.hide();
 
-    flippedVideo = ml5.flipImage(video)
+    flippedVideo = ml5.flipImage(video);
     // Start classifying
     classifyVideo();
+    windowResized();
+}
+
+
+function windowResized() {
+    getCanvasDimension();
+    resizeCanvas(width, height);
+    video.size(width, height - 21);
 }
 
 function draw() {
@@ -49,8 +71,8 @@ function classifyVideo() {
 function gotResult(error, results) {
     // If there is an error
     if (error) {
-    console.error(error);
-    return;
+        console.error(error);
+        return;
     }
     // The results are in an array ordered by confidence.
     // console.log(results[0]);
