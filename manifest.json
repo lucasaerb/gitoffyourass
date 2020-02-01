@@ -3,11 +3,15 @@
     "name": "moveNow",
     "version": "0.1",
     "description": "This forces you to workout!",
+<<<<<<< Updated upstream
     "permissions": [
       "tabs", 
       "background"
     ],
     "browser_action": { },
+=======
+    "permissions": ["tabs", "alarms"],
+>>>>>>> Stashed changes
     "background": {
         "scripts": [
           "background.js"
