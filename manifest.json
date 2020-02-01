@@ -6,7 +6,8 @@
     "permissions": [
       "tabs", 
       "background",
-      "alarms"
+      "alarms",
+      "storage"
     ],
     "browser_action": {
       "default_title": "moveNow",      

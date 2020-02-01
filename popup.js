@@ -1,3 +1,9 @@
-document.getElementById("seconds").addEventListener('change',(event) => {
-    chrome.runtime.sendMessage({seconds:event.target.value})
+const seconds = document.getElementById("seconds")
+
+seconds.value = (localStorage.getItem('seconds') || 5)
+
+seconds.addEventListener('change',(event) => {
+    const value = event.target.value
+    localStorage.setItem("seconds", value)
+    chrome.runtime.sendMessage({seconds:value})
 })
