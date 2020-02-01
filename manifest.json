@@ -8,11 +8,14 @@
       "background",
       "alarms"
     ],
-    "browser_action": { },
+    "browser_action": {
+      "default_title": "moveNow",      
+      "default_popup": "popup.html"
+     },
     "background": {
-        "scripts": [
-          "background.js"
-        ],
-        "persistent": false
-      }
+      "scripts": [
+        "background.js"
+      ],
+      "persistent": false
+    }
 }
