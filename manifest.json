@@ -25,5 +25,5 @@
       "libraries//p5.min.js",
       "libraries/ml5.min.js"
     ],
-    "content_security_policy": "script-src 'self' 'unsafe-eval' https://storage.googleapis.com; object-src 'self'"
-}
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+  }
