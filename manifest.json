@@ -3,9 +3,15 @@
     "name": "moveNow",
     "version": "0.1",
     "description": "This forces you to workout!",
-    "permissions": ["tabs"],
+    "permissions": [
+      "tabs", 
+      "background"
+    ],
+    "browser_action": { },
     "background": {
-        "scripts": ["background.js"],
+        "scripts": [
+          "background.js"
+        ],
         "persistent": false
       }
 }
