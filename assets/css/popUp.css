@@ -1,0 +1,257 @@
+#timer_counter {
+	font-family: 'Raleway', sans-serif;
+	font-size: 20px;
+	text-overflow: ellipsis;
+	text-align: center;
+
+	color: rgba(255,255,255,1);
+
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	margin: 0 auto 15px;
+	padding: 0 20px;
+
+	border: none;
+    border-radius: 25px;
+}
+
+#timer_counter.playing {
+	background-color: rgba(255,255,255,0.25);
+}
+
+#timer_counter.stopped {
+	background-color: rgba(255,255,255,0.1);
+}
+
+input.timer_part {
+	padding: 0 2%;
+	width: 50px;
+	text-align: center;
+
+	font-family: 'Raleway', sans-serif;
+	font-size: 20px;
+	text-overflow: ellipsis;
+	
+	color: rgba(255,255,255,1);
+	background: none;
+
+	border: none;
+}
+
+input.timer_part:focus {
+	border: none;
+	outline: none;
+}
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+	font-family: 'Raleway', sans-serif;
+	background-color: rgb(220, 167, 138);
+	color: rgb(255,255,255);
+
+	margin: 0;
+	padding: 0;
+
+	min-width: 280px;
+	min-height: 252px;
+}
+
+#popup-content {
+	padding: 20px;
+	-webkit-transition: all 30s ease-in-out;
+	-o-transition: all 30s ease-in-out;
+	transition: all 30s ease-in-out;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#combos_sound {
+	margin-bottom: 20px;
+	width: 100%;
+}
+
+#soundToggle {
+	display: inline-block;
+	cursor: pointer;
+	height: 22px;
+
+	width: 25%;
+}
+
+#soundToggle img {
+	height: 100%;
+}
+
+#soundSlider {
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+	transition: all .2s ease-in-out;
+}
+
+input[type=range] {
+	-webkit-appearance: none;
+	width: 70%;
+  	border-radius: 1rem;
+	background-color: rgb(255,255,255);
+	height: 2px;
+	vertical-align: middle;
+	margin: 0 0 15px 0;
+	opacity: 0.5;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+  	border-radius: 1rem;
+    height:15px;
+    width:15px;
+    background-color: rgba(255,255,255,0.5);
+    background-image:url('/img/volume-slider-dot.png');
+    background-size: 15px 15px;
+}
+
+input[type=range] {
+  outline: none;
+}
+
+input[type=range]:hover,
+input[type=range]:active {
+  cursor: pointer;
+  opacity: 1;
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: transparent; /* Hides the slider so custom styles can be added */
+  border-color: transparent;
+  color: transparent;
+}
+
+.combo-loaded {
+	max-width: 240px;
+	overflow: hidden;
+}
+
+.combo-empty {
+	color: rgba(255,255,255,0.5) !important;
+}
+
+.combo-active {
+  background-color: rgba(255,255,255,0.25);
+}
+
+#combos_list {
+	margin-bottom: 15px;
+}
+
+#timer_counter {
+	font-family: 'Raleway', sans-serif;
+	font-size: 20px;
+	text-overflow: ellipsis;
+	text-align: center;
+
+	color: rgba(255,255,255,1);
+
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	margin: 0 auto 15px;
+	padding: 0 20px;
+
+	border: none;
+    border-radius: 25px;
+}
+
+#timer_counter.playing {
+	background-color: rgba(255,255,255,0.25);
+}
+
+#timer_counter.stopped {
+	background-color: rgba(255,255,255,0.1);
+}
+
+input.timer_part {
+	padding: 0 2%;
+	width: 35px;
+	text-align: center;
+
+	font-family: 'Raleway', sans-serif;
+	font-size: 20px;
+	text-overflow: ellipsis;
+	
+	color: rgba(255,255,255,1);
+	background: none;
+
+	border: none;
+}
+
+input.timer_part:focus {
+	border: none;
+	outline: none;
+}
+
+#timer_controls li a {
+	width: 47%;
+	margin-bottom: 0;
+}
+
+#timer_controls li:nth-child(1) a,
+#timer_controls li:nth-child(2) a {
+	margin-right: 2%;
+
+}
+
+ul {
+	margin: 0;
+	padding:0;
+}
+
+ul li {
+	display: inline;
+	list-style-type: none;
+}
+
+.button {
+	font-family: 'Raleway', sans-serif;
+	font-size: 15px;
+	text-decoration: none;
+    text-overflow: ellipsis;
+
+	color: rgba(255,255,255,1);
+	background-color: rgba(255,255,255,0.1);
+
+	display: inline-block;
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+
+	margin: 0 auto 15px;
+	padding: 0 20px;
+	border: none;
+    border-radius: 25px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.button:focus {
+	border: none;
+	outline: none;
+}
+
+.button:hover {
+	background-color: rgba(255,255,255,0.25);
+}
+
+.button.disabled {
+	color: rgba(255,255,255,0.5);
+	pointer-events: none;
+   	cursor: default;
+}

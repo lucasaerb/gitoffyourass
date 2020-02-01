@@ -1,9 +1,14 @@
-const seconds = document.getElementById("seconds")
+// const seconds = document.getElementById("seconds")
+// const hours = document.getElementById('timer_hours')
 
-seconds.value = (localStorage.getItem('seconds') || 5)
+// hours.addEventListener('change', event => {
 
-seconds.addEventListener('change',(event) => {
-    const value = event.target.value
-    localStorage.setItem("seconds", value)
-    chrome.runtime.sendMessage({seconds:value})
-})
+// })
+
+// seconds.value = (localStorage.getItem('seconds') || 5)
+
+// seconds.addEventListener('change',(event) => {
+//     const value = event.target.value
+//     localStorage.setItem("seconds", value)
+//     chrome.runtime.sendMessage({seconds:value})
+// })
