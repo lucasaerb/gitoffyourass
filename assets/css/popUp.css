@@ -1,5 +1,61 @@
+* {
+	--white: #FFF;
+	--offWhite: #E8EAED;
+	--orange: #E94F37;
+	--grey1: #393E41;
+	--black: #191716;
+	font-family: Oxygen, -apple-system, BlinkMacSystemFont, Roboto, 'Open Sans', sans-serif;
+	border-radius: 10px !important; 
+}
+#logo {
+	width: 70vh;
+	/* justify-self: center; */
+	margin-left: 7px;
+	margin-bottom: 5px;
+}
+
+body {
+	background-color: var(--orange); /* rgb(220, 167, 138);*/
+	color: rgb(255,255,255);
+
+	margin: 0;
+	padding: 0;
+
+	min-width: 280px;
+	min-height: 252px;
+	
+}
+
+#combos_timer {
+	margin-top: 20px;
+}
+
+#popup-content {
+	border-radius: 10px !important;
+	padding: 20px;
+	-webkit-transition: all 30s ease-in-out;
+	-o-transition: all 30s ease-in-out;
+	transition: all 30s ease-in-out;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+	user-select: none;
+	
+/* 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center; */
+}
+#text {
+	text-align: center;
+	font-size: 18;
+}
 #timer_counter {
-	font-family: 'Raleway', sans-serif;
+	display: flex;
+	justify-content: space-around;
+	
 	font-size: 20px;
 	text-overflow: ellipsis;
 	text-align: center;
@@ -29,7 +85,6 @@ input.timer_part {
 	width: 50px;
 	text-align: center;
 
-	font-family: 'Raleway', sans-serif;
 	font-size: 20px;
 	text-overflow: ellipsis;
 	
@@ -49,32 +104,10 @@ input.timer_part:focus {
   box-sizing: border-box;
 }
 
-body {
-	font-family: 'Raleway', sans-serif;
-	background-color: rgb(220, 167, 138);
-	color: rgb(255,255,255);
-
-	margin: 0;
-	padding: 0;
-
-	min-width: 280px;
-	min-height: 252px;
-}
-
-#popup-content {
-	padding: 20px;
-	-webkit-transition: all 30s ease-in-out;
-	-o-transition: all 30s ease-in-out;
-	transition: all 30s ease-in-out;
-
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
 #combos_sound {
-	margin-bottom: 20px;
+	margin-top: 20px;
+	padding: 15px;
+	/* margin-bottom: 20px; */
 	width: 100%;
 }
 
@@ -82,8 +115,8 @@ body {
 	display: inline-block;
 	cursor: pointer;
 	height: 22px;
-
-	width: 25%;
+	margin-left: 12px;
+	width: 18%;
 }
 
 #soundToggle img {
@@ -152,23 +185,6 @@ input[type=range]::-ms-track {
 	margin-bottom: 15px;
 }
 
-#timer_counter {
-	font-family: 'Raleway', sans-serif;
-	font-size: 20px;
-	text-overflow: ellipsis;
-	text-align: center;
-
-	color: rgba(255,255,255,1);
-
-	width: 100%;
-	height: 40px;
-	line-height: 40px;
-	margin: 0 auto 15px;
-	padding: 0 20px;
-
-	border: none;
-    border-radius: 25px;
-}
 
 #timer_counter.playing {
 	background-color: rgba(255,255,255,0.25);
@@ -183,7 +199,6 @@ input.timer_part {
 	width: 35px;
 	text-align: center;
 
-	font-family: 'Raleway', sans-serif;
 	font-size: 20px;
 	text-overflow: ellipsis;
 	
@@ -220,7 +235,6 @@ ul li {
 }
 
 .button {
-	font-family: 'Raleway', sans-serif;
 	font-size: 15px;
 	text-decoration: none;
     text-overflow: ellipsis;

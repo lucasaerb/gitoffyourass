@@ -97,7 +97,7 @@ const onStart = event => {
     localStorage.setItem('cancel', true)
     cancel.className = "button"
     start.className = "button disabled"
-    text.innerHTML = "GET READY TO WORK!!"
+    text.innerHTML = "Get ready to WORK!!"
 
     chrome.runtime.sendMessage({hours:h, minutes: m, seconds:s})
 }

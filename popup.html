@@ -6,13 +6,9 @@
 
   <body>
     <div id="popup-content">
-      <div id="combos_sound">
-        <div id="soundToggle">
-          <img alt="Mute" id="unmute-button" src="assets/img/unmute.png" style="opacity: 0.5; display: inline;" title="Mute">
-          <img alt="Unmute" id="mute-button" src="assets/img/mute.png" style="opacity: 1; display: none;" title="Unmute">
-        </div>
-        <input id="soundSlider" type="range" name="points" min="0" max="100" value="100">
-      </div>
+      <image id = "logo" src="/assets/img/logo-popup.png"></image>
+      
+      <p id="text"></p>
       <div id="combos_timer">
         <div id="timer_counter" class="stopped">
           <input id="timer_hours" type="number" class="timer_part" maxlength="2" min="00" max="23" value="0">
@@ -21,7 +17,6 @@
           <span>:</span>
           <input id="timer_seconds"  type="number" class="timer_part" maxlength="2" min="00" max="59" value="0">
         </div>
-        <p id="text"></p>
         <ul id="timer_controls">
           <li><a href="#" class="button" id="timer_start">Start</a></li>
           <li><a href="#" class="button disabled" id="timer_stop">Cancel</a></li>
@@ -29,7 +24,13 @@
           <!-- <li><a href="#" class="button" id="timer_resume" style="display:none">Resume</a></li> -->
         </ul>
       </div>
-    
+      <div id="combos_sound">
+        <div id="soundToggle">
+          <img alt="Mute" id="unmute-button" src="assets/img/unmute.png" style="opacity: 0.5; display: inline;" title="Mute">
+          <img alt="Unmute" id="mute-button" src="assets/img/mute.png" style="opacity: 1; display: none;" title="Unmute">
+        </div>
+        <input id="soundSlider" type="range" name="points" min="0" max="100" value="100">
+      </div>
     </div>
       <script src="scripts/popupScript.js"> </script>
   </body>
