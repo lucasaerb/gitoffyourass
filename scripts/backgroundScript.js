@@ -1,23 +1,3 @@
-let delay = 1 //default is 5 seconds
-
-const onMessage = message => {
-  if(message.done){
-    const currentTab = parseInt(localStorage.getItem('tabId'),10)
-        
-    localStorage.removeItem('tabId')
-    chrome.tabs.getAllInWindow(null, tabs => {
-      for (const tab of tabs){
-          if (tab.id !== currentTab){
-              chrome.tabs.sendMessage(tab.id, {done:true})
-          }
-      }
-  })
-  }
-  else{
-    chrome.alarms.create("second", {when: Date.now() + 1000})
-  }
-}
-
 const decrementTime = () => {
   const s = parseInt(localStorage.getItem('seconds'),10)
   const m = parseInt(localStorage.getItem('minutes'),10)
@@ -56,6 +36,34 @@ const muteTabs = () => {
       } 
     }
 })}
+
+const unmuteTabs = () => {
+  chrome.tabs.getAllInWindow(null, tabs => {
+    for(const tab of tabs){
+      const mutedInfo = tab.mutedInfo;
+      if (mutedInfo){
+        chrome.tabs.update(tab.id, {"muted": false});
+      } 
+    }
+})}
+
+const onMessage = message => {
+  if(message.done){
+    const currentTab = parseInt(localStorage.getItem('tabId'),10)
+    unmuteTabs()
+    localStorage.removeItem('tabId')
+    chrome.tabs.getAllInWindow(null, tabs => {
+      for (const tab of tabs){
+          if (tab.id !== currentTab){
+              chrome.tabs.sendMessage(tab.id, {done:true})
+          }
+      }
+  })
+  }
+  else{
+    chrome.alarms.create("second", {when: Date.now() + 1000})
+  }
+}
 
 const onUpdate = (tabId, changeInfo) => {
   if(localStorage.getItem('tabId')){
