@@ -139,14 +139,6 @@ function classifyVideo() {
     vid.volume((parseInt(localStorage.getItem('soundLevel'),10)/100).toFixed(1))
 }
 
-function playHooray(){
-    if (song.isPlaying()) {
-        song.stop();
-    } else {
-        song.play();
-    }
-}
-
 // When we get a result
 function gotResult(error, results) {
     // If there is an error
@@ -163,15 +155,12 @@ function gotResult(error, results) {
     if (squats === 0){
         chrome.runtime.sendMessage({done:true})
 
-        //Wait for confetti
-        // makeConfetti();
-        // vid.pause();
-        window.playHooray();
+        song.play();
         confetti.start();
 
         setTimeout(function(){
             window.close()
-        }, 15000)
+        }, 10000)
         
     }
 
