@@ -109,7 +109,7 @@ function classifyVideo() {
     vid.volume(parseInt(localStorage.getItem('soundLevel'),10)/100)
 //     chrome.runtime.sendMessage({test:"HII"})
 //     localStorage.removeItem('tabId')
-// }
+}
 
 // When we get a result
 function gotResult(error, results) {
