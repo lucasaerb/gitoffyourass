@@ -119,6 +119,7 @@ const onCancel = event => {
     minutes.value = m > 9 ? m : "0"+m
     seconds.value = s > 9 ? s : "0"+s
     localStorage.setItem('cancel', false)
+    chrome.runtime.sendMessage({done: true})
 }
 
 const onTimeChange = (value, hour, minute, second) => {
