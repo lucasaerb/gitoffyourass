@@ -1,7 +1,21 @@
 let delay = 1 //default is 5 seconds
 
 const onMessage = message => {
-  chrome.alarms.create("second", {when: Date.now() + 1000})
+  if(message.done){
+    const currentTab = parseInt(localStorage.getItem('tabId'),10)
+        
+    localStorage.removeItem('tabId')
+    chrome.tabs.getAllInWindow(null, tabs => {
+      for (const tab of tabs){
+          if (tab.id !== currentTab){
+              chrome.tabs.sendMessage(tab.id, {done:true})
+          }
+      }
+  })
+  }
+  else{
+    chrome.alarms.create("second", {when: Date.now() + 1000})
+  }
 }
 
 const decrementTime = () => {
@@ -45,16 +59,11 @@ const muteTabs = () => {
 
 const onUpdate = (tabId, changeInfo) => {
   if(localStorage.getItem('tabId')){
-    // chrome.tabs.getAllInWindow(null, tabs => {
-      // for (const tab of tabs){
-        chrome.tabs.executeScript(tabId, {file: "contentScript.js"})
-        const mutedInfo = changeInfo.mutedInfo;
-        if (mutedInfo){
-          chrome.tabs.update(tabId, {"muted": true});
-        }
-        // muteTabs()
-      // }
-    // } )
+    chrome.tabs.executeScript(tabId, {file: "contentScript.js"})
+    const mutedInfo = changeInfo.mutedInfo;
+    if (mutedInfo){
+      chrome.tabs.update(tabId, {"muted": true});
+    }
   }
 }
 

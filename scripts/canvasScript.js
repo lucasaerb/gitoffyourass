@@ -93,6 +93,7 @@ function setup() {
     // Start classifying
     classifyVideo();
     windowResized();
+    setNumberDisplay(squats, `squats left`)
 }
 
 function vidLoad() {
@@ -134,14 +135,6 @@ function classifyVideo() {
     flippedVideo = ml5.flipImage(video)
     classifier.classify(flippedVideo, gotResult);
     vid.volume((parseInt(localStorage.getItem('soundLevel'),10)/100).toFixed(1))
-    chrome.tabs.getAllInWindow(null, tabs => {
-        for (const tab of tabs){
-            if (tab.id !== localStorage.getItem('tabId')){
-                chrome.tabs.sendMessage(tab.id, {done:true})
-            }
-        }
-    })
-    localStorage.removeItem('tabId')
 }
 
 // When we get a result
@@ -157,15 +150,20 @@ function gotResult(error, results) {
 
     updateData(label)
 
+    if (squats === 0){
+        chrome.runtime.sendMessage({done:true})
+
+        //Wait for confetti
+        setTimeout(function(){}, 1000)
+        window.close()
+    }
+
     if(counter === 20){
         counter = 0
         if(data.squat >= 12){
             console.log("Its a squat!!")
             if (squats > 0){
                 squats--;
-            }
-            else {
-                console.log("Squats at 0!! Close window!");
             }
             setNumberDisplay(squats, `SQUATS LEFT`)
             vid.src = `assets/video/shia${squats}.mp4`
