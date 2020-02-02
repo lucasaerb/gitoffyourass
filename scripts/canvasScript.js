@@ -21,7 +21,7 @@ let vidWidth;
 
 let shiaCount = 0;
 
-let squats = 1
+let squats = 10
 
 let counter = 0
 
@@ -184,7 +184,9 @@ function gotResult(error, results) {
             }
             setNumberDisplay(squats, `SQUATS LEFT`)
             vid.src = `assets/video/shia${squats}.mp4`
-            vid.play();
+            setTimeout(function(){
+                vid.play();
+            }, 200)
         }
         console.log(data);
         data = emptyData()
