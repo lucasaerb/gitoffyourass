@@ -50,18 +50,16 @@ const updateData = s => {
 
 function getCanvasDimension(){
     width = document.getElementById('canvas').clientWidth;
-    height = width* ratio - 20;
-    
-
+    height = width * ratio - 20;
 }
 
 function getVideoDimension(){
-    vidWidth = document.getElementById('rightVideo').clientWidth * 2 - 25;
+    vidWidth = document.getElementById('rightVideo').clientWidth * 1.8 - 25;
     vidHeight = width * ratio;
 }
 
 function setNumberDisplay(number, message){
-    document.getElementById('numberDisplay').innerHTML = number;
+    document.getElementById('numberDisplay').innerHTML = "0" + number;
     document.getElementById('numberComment').innerHTML = message;
 }
 
@@ -77,7 +75,7 @@ function setup() {
 
     // Create the video
     video = createCapture(VIDEO);
-    video.size(width, height - 21);
+    video.size(width, height - 40);
     video.hide();
     flippedVideo = ml5.flipImage(video);
 
@@ -106,6 +104,7 @@ function vidLoad() {
     else{
         vid.volume(soundLevel/100);
     }
+    vid.play();
 }
 
 function windowResized() {
@@ -113,7 +112,7 @@ function windowResized() {
     getVideoDimension();
     resizeCanvas(width, height);
 
-    video.size(width, height - 21);
+    video.size(width, height);
     vid.size(vidWidth, vidHeight);
     document.getElementById('canvas').style.height = vidHeight-20;
 }
@@ -127,7 +126,7 @@ function draw() {
     fill(255);
     textSize(16);
     textAlign(CENTER);
-    text(label, width / 2, height - 4);
+    // text(label, width / 2, height - 4);
 }
 
 // Get a prediction for the current video frame
@@ -162,15 +161,20 @@ function gotResult(error, results) {
         counter = 0
         if(data.squat >= 12){
             console.log("Its a squat!!")
-            squats--
-            setNumberDisplay(squats, `squats left`)
+            if (squats > 0){
+                squats--;
+            }
+            else {
+                console.log("Squats at 0!! Close window!");
+            }
+            setNumberDisplay(squats, `SQUATS LEFT`)
             vid.src = `assets/video/shia${squats}.mp4`
             vid.play();
         }
         console.log(data)
         data = emptyData()
     }
-    counter++
+    counter++;
     // Classifiy again!
     classifyVideo();
 }
