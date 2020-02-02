@@ -18,6 +18,8 @@ let vid;
 let vidHeight;
 let vidWidth;
 
+let shiaCount = 0;
+
 
 
 function getCanvasDimension(){
@@ -56,13 +58,13 @@ function setup() {
     
     getVideoDimension();
     vid = createVideo(
-        ['assets/video/shia.mp4'],
+        ['assets/video/shia0.mp4',],
         vidLoad
     );
 
     vid.parent("rightVideo");
     vid.size(vidWidth, vidHeight);
-    document.getElementById('canvas').style.height = vidHeight - 40;
+    document.getElementById('canvas').style.height = vidHeight-20;
 
     // Start classifying
     classifyVideo();
@@ -87,7 +89,7 @@ function windowResized() {
 
     video.size(width, height - 21);
     vid.size(vidWidth, vidHeight);
-    document.getElementById('canvas').style.height = vidHeight - 40;
+    document.getElementById('canvas').style.height = vidHeight-20;
 }
 
 function draw() {
@@ -119,7 +121,8 @@ function gotResult(error, results) {
         return;
     }
     // The results are in an array ordered by confidence.
-    // console.log(results[0]);
+    console.log(results[0]);
+
     label = results[0].label;
     // Classifiy again!
     classifyVideo();

@@ -3,6 +3,11 @@
     "name": "moveNow",
     "version": "0.1",
     "description": "This forces you to workout!",
+    "icons": { 
+      "16": "assets/img/favicon-16.png",
+      "48": "assets/img/favicon-48.png",
+     "128": "assets/img/favicon-128.png"
+    },
     "permissions": [
       "tabs", 
       "background",
@@ -13,7 +18,8 @@
     ],
     "browser_action": {
       "default_title": "moveNow",      
-      "default_popup": "popup.html"
+      "default_popup": "popup.html",
+      "default_icon": "assets/img/favicon.ico"
      },
      "content_scripts": [
       {
