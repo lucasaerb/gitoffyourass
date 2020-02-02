@@ -18,8 +18,7 @@
     ],
     "browser_action": {
       "default_title": "moveNow",      
-      "default_popup": "popup.html",
-      "default_icon": "assets/img/favicon.ico"
+      "default_popup": "popup.html"
      },
      "content_scripts": [
       {

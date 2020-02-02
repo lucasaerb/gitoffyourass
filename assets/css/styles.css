@@ -158,3 +158,8 @@ body{
 .margin {
     margin: 10px;
 }
+
+#headerLogo {
+    height: 80px;
+    /* height: */
+}
