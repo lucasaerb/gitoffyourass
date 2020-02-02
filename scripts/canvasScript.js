@@ -25,6 +25,10 @@ let squats = 10
 
 let counter = 0
 
+let poseNet;
+let pose;
+let skeleton;
+
 const emptyData = () => ({
     stand: 0,
     squat: 0,
@@ -80,7 +84,8 @@ function setup() {
     video.size(width, height - 40);
     video.hide();
     flippedVideo = ml5.flipImage(video);
-
+    poseNet = ml5.poseNet(video, ()=>console.log("model ready!"));
+    poseNet.on('pose', gotPoses);
     
     getVideoDimension();
     vid = createVideo(
@@ -97,6 +102,20 @@ function setup() {
     windowResized();
     setNumberDisplay(squats, `squats left`)
 }
+
+function gotPoses(poses) {
+    // console.log(poses); 
+    if (poses.length > 0) {
+      pose = poses[0].pose;
+      skeleton = poses[0].skeleton;
+        for (let i = 0; i < pose.keypoints.length; i++) {
+          let x = pose.keypoints[i].position.x;
+          let y = pose.keypoints[i].position.y;
+
+        }
+        // let target = [targetLabel];
+    }
+  }
 
 function vidLoad() {
     vid.loop();
@@ -129,6 +148,29 @@ function draw() {
     fill(255);
     textSize(16);
     textAlign(CENTER);
+
+    translate(video.width, 0);
+    scale(-1, 1);
+    image(video, 0, 0, video.width, video.height);
+  
+    if (pose) {
+      for (let i = 0; i < skeleton.length; i++) {
+        let a = skeleton[i][0];
+        let b = skeleton[i][1];
+        strokeWeight(2);
+        stroke(1);
+        fill(255)
+        line(a.position.x, a.position.y, b.position.x, b.position.y);
+      }
+      for (let i = 0; i < pose.keypoints.length; i++) {
+        let x = pose.keypoints[i].position.x;
+        let y = pose.keypoints[i].position.y;
+        fill(0);
+        stroke(255);
+        ellipse(x, y, 16, 16);
+      }
+    }
+
     // text(label, width / 2, height - 4);
 }
 
