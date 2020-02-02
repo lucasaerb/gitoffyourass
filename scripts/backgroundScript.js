@@ -1,7 +1,12 @@
 let delay = 1 //default is 5 seconds
 
 const onMessage = message => {
+  if(message.test){
+    console.log(message)
+  }
+  else{
   chrome.alarms.create("second", {when: Date.now() + 1000})
+  }
 }
 
 const decrementTime = () => {
@@ -33,6 +38,27 @@ const getTimeLeftMs = () => {
   return (s + (m* 60) + (h* 60)) * 1000
 }
 
+const muteTabs = () => {
+  chrome.tabs.getAllInWindow(null, tabs => {
+    for(const tab of tabs){
+      const mutedInfo = tab.mutedInfo;
+      if (mutedInfo){
+        chrome.tabs.update(tab.id, {"muted": true});
+      } 
+    }
+})}
+
+const onUpdate = () => {
+  if(localStorage.getItem('tabId')){
+    chrome.tabs.getAllInWindow(null, tabs => {
+      for (const tab of tabs){
+        chrome.tabs.executeScript(tab.id, {file: "contentScript.js"})
+        muteTabs()
+      }
+    })
+  }
+}
+
 const onAlarm = alarm => {
   chrome.alarms.clear("second")
   decrementTime()
@@ -42,11 +68,11 @@ const onAlarm = alarm => {
       localStorage.setItem('cancel', false)
       chrome.tabs.getAllInWindow(null, tabs => {
         for (const tab of tabs){
-          console.log(tab.id)
           chrome.tabs.executeScript(tab.id, {file: "contentScript.js"})
         }
       })
-      chrome.tabs.create({url: 'index.html'});
+      muteTabs()
+      chrome.tabs.create({url: 'index.html'}, tab => localStorage.setItem('tabId', tab.id));
       return;
   }
   chrome.runtime.sendMessage({updateTime: true})
@@ -57,3 +83,4 @@ const onAlarm = alarm => {
 
 chrome.runtime.onMessage.addListener(onMessage)
 chrome.alarms.onAlarm.addListener(onAlarm)
+chrome.tabs.onUpdated.addListener(onUpdate)

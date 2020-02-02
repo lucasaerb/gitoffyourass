@@ -71,7 +71,13 @@ function setup() {
 
 function vidLoad() {
     vid.loop();
-    vid.volume(0);
+    const soundLevel = parseInt(localStorage.getItem('soundLevel'),10) 
+    if (isNaN(soundLevel)){
+        vid.volume(0.5)
+    }
+    else{
+        vid.volume(soundLevel/100);
+    }
 }
 
 function windowResized() {
@@ -100,7 +106,10 @@ function draw() {
 function classifyVideo() {
     flippedVideo = ml5.flipImage(video)
     classifier.classify(flippedVideo, gotResult);
-}
+    vid.volume(parseInt(localStorage.getItem('soundLevel'),10)/100)
+//     chrome.runtime.sendMessage({test:"HII"})
+//     localStorage.removeItem('tabId')
+// }
 
 // When we get a result
 function gotResult(error, results) {
@@ -115,4 +124,3 @@ function gotResult(error, results) {
     // Classifiy again!
     classifyVideo();
 }
-

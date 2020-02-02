@@ -2,6 +2,10 @@ const hours = document.getElementById('timer_hours')
 const minutes = document.getElementById('timer_minutes')
 const seconds = document.getElementById('timer_seconds')
 
+const soundSlider = document.getElementById('soundSlider')
+const unmute = document.getElementById('unmute-button')
+const mute = document.getElementById('mute-button')
+
 const start = document.getElementById('timer_start')
 const cancel = document.getElementById('timer_stop')
 
@@ -29,9 +33,31 @@ const initButtons = () => {
     }
 }
 
+const initSounds = () => {
+    const getSoundLevel = localStorage.getItem('soundLevel')
+    let soundLevel;
+    if (!getSoundLevel){
+        soundLevel = 50
+        localStorage.setItem('soundLevel', 50)
+    }
+    else{
+        soundLevel = getSoundLevel
+    }
+    if (soundLevel === "0"){
+        mute.style.display = 'inline'
+        unmute.style.display = 'none'
+    }
+    else{
+        mute.style.display = 'none'
+        unmute.style.display = 'inline'
+    }
+    soundSlider.value = soundLevel
+}
+
 const init = () => {
     initTime()
     initButtons()
+    initSounds()
 }
 
 init()
@@ -130,9 +156,45 @@ const onTimeChange = (value, hour, minute, second) => {
     }
 }
 
+const onSoundsChange = event => {
+    const soundLevel = parseInt(event.target.value, 10)
+    if (soundLevel === 0){
+        mute.style.display = 'inline'
+        unmute.style.display = 'none'
+    }
+    else{
+        mute.style.display = 'none'
+        unmute.style.display = 'inline'
+    }
+    localStorage.setItem('soundLevel', soundLevel)
+    soundSlider.value = soundLevel
+}
+
+const onMuteClick = () => {
+    mute.style.display = 'none'
+    unmute.style.display = 'inline'
+    let soundLevel = parseInt(localStorage.getItem('soundLevel'),10)
+    if (soundLevel === 0){
+        localStorage.setItem('soundLevel',50)
+        soundLevel = 50
+    }
+    soundSlider.value = soundLevel
+}
+
+const onUnmuteClick = () => {
+    mute.style.display = 'inline'
+    unmute.style.display = 'none'
+    soundSlider.value = 0
+    localStorage.setItem('soundLevel', 0)
+}
+
 hours.addEventListener('keyup', event => onTimeChange(event.target.value, true, false, false))
 minutes.addEventListener('keyup', event => onTimeChange(event.target.value, false, true, false))
 seconds.addEventListener('keyup', event => onTimeChange(event.target.value, false, false, true))
+
+soundSlider.addEventListener('change', onSoundsChange)
+mute.addEventListener('click', onMuteClick)
+unmute.addEventListener('click', onUnmuteClick)
 
 start.addEventListener('click', onStart)
 cancel.addEventListener('click', onCancel)
