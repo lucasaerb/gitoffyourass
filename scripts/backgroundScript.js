@@ -40,12 +40,20 @@ const onAlarm = alarm => {
   if (timeLeft === 0){
       chrome.runtime.sendMessage({done: true})
       localStorage.setItem('cancel', false)
+      chrome.tabs.getAllInWindow(null, tabs => {
+        for (const tab of tabs){
+          console.log(tab.id)
+          chrome.tabs.executeScript(tab.id, {file: "contentScript.js"})
+        }
+      })
       chrome.tabs.create({url: 'index.html'});
       return;
   }
   chrome.runtime.sendMessage({updateTime: true})
   chrome.alarms.create("second", {when: Date.now() + 1000})
 }
+
+
 
 chrome.runtime.onMessage.addListener(onMessage)
 chrome.alarms.onAlarm.addListener(onAlarm)

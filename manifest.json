@@ -7,12 +7,21 @@
       "tabs", 
       "background",
       "alarms",
-      "storage"
+      "storage",
+      "https://*/",
+      "http://*/"
     ],
     "browser_action": {
       "default_title": "moveNow",      
       "default_popup": "popup.html"
      },
+     "content_scripts": [
+      {
+        "matches": ["http://*/"],
+        "css": ["content.css"],
+        "js": ["contentScript.js"]
+      }
+    ],
     "background": {
         "scripts": [
           "scripts/backgroundScript.js"
