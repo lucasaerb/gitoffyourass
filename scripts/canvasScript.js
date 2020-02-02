@@ -175,7 +175,7 @@ function gotResult(error, results) {
             vid.src = `assets/video/shia${squats}.mp4`
             setTimeout(function(){
                 vid.play();
-            }, 200)
+            }, 500)
         }
         console.log(data);
         data = emptyData()
