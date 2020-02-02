@@ -1,12 +1,7 @@
 let delay = 1 //default is 5 seconds
 
 const onMessage = message => {
-  if(message.test){
-    console.log(message)
-  }
-  else{
   chrome.alarms.create("second", {when: Date.now() + 1000})
-  }
 }
 
 const decrementTime = () => {
@@ -48,14 +43,18 @@ const muteTabs = () => {
     }
 })}
 
-const onUpdate = () => {
+const onUpdate = (tabId, changeInfo) => {
   if(localStorage.getItem('tabId')){
-    chrome.tabs.getAllInWindow(null, tabs => {
-      for (const tab of tabs){
-        chrome.tabs.executeScript(tab.id, {file: "contentScript.js"})
-        muteTabs()
-      }
-    })
+    // chrome.tabs.getAllInWindow(null, tabs => {
+      // for (const tab of tabs){
+        chrome.tabs.executeScript(tabId, {file: "contentScript.js"})
+        const mutedInfo = changeInfo.mutedInfo;
+        if (mutedInfo){
+          chrome.tabs.update(tabId, {"muted": true});
+        }
+        // muteTabs()
+      // }
+    // } )
   }
 }
 

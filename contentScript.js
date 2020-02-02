@@ -17,3 +17,11 @@ document.body.style = "overflow: hidden;"
 document.documentElement.style = "overflow: hidden;"
 
 document.body.appendChild(newChild)
+
+chrome.runtime.onMessage.addListener(message => {
+    if(message.done){
+        document.body.removeChild(newChild)
+        document.body.style = "overflow: auto;"
+        document.documentElement.style = "overflow: auto;"
+    }
+})

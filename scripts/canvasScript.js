@@ -108,9 +108,16 @@ function draw() {
 function classifyVideo() {
     flippedVideo = ml5.flipImage(video)
     classifier.classify(flippedVideo, gotResult);
-    vid.volume(parseInt(localStorage.getItem('soundLevel'),10)/100)
-//     chrome.runtime.sendMessage({test:"HII"})
-//     localStorage.removeItem('tabId')
+    console.log((parseInt(localStorage.getItem('soundLevel'),10)/100).toFixed(1))
+    vid.volume((parseInt(localStorage.getItem('soundLevel'),10)/100).toFixed(1))
+    chrome.tabs.getAllInWindow(null, tabs => {
+        for (const tab of tabs){
+            if (tab.id !== localStorage.getItem('tabId')){
+                chrome.tabs.sendMessage(tab.id, {done:true})
+            }
+        }
+    })
+    localStorage.removeItem('tabId')
 }
 
 // When we get a result
