@@ -2,7 +2,7 @@
 
 let classifier;
 // Model URL
-let imageModelURL = 'https://storage.googleapis.com/tm-model/7SX5ZKcp/';
+let imageModelURL = 'https://teachablemachine.withgoogle.com/models/D4fWmKwB/';
 
 // Video
 let video;
@@ -19,6 +19,32 @@ let vidHeight;
 let vidWidth;
 
 let shiaCount = 0;
+
+let squats = 10
+
+let counter = 0
+
+const emptyData = () => ({
+    stand: 0,
+    squat: 0,
+    misc: 0
+})
+
+let data = emptyData
+
+const updateData = s => {
+    switch (s){
+        case 'stand':
+            data.stand++
+            break
+        case 'squat':
+            data.squat++
+            break
+        case 'misc':
+            data.misc++
+            break
+    }
+}
 
 
 
@@ -108,7 +134,6 @@ function draw() {
 function classifyVideo() {
     flippedVideo = ml5.flipImage(video)
     classifier.classify(flippedVideo, gotResult);
-    console.log((parseInt(localStorage.getItem('soundLevel'),10)/100).toFixed(1))
     vid.volume((parseInt(localStorage.getItem('soundLevel'),10)/100).toFixed(1))
     chrome.tabs.getAllInWindow(null, tabs => {
         for (const tab of tabs){
@@ -128,9 +153,23 @@ function gotResult(error, results) {
         return;
     }
     // The results are in an array ordered by confidence.
-    console.log(results[0]);
 
     label = results[0].label;
+
+    updateData(label)
+
+    if(counter === 25){
+        counter = 0
+        if(data.standing >= 10 && data.misc <= 5 && data.sitting >= 10){
+            console.log("Its a squat!!")
+            squats--
+            setNumberDisplay(10, `${squats} left`)
+            vid.src = `assets/video/shia${squats}.mp4`
+        }
+        console.log(data)
+        data = emptyData()
+    }
+    counter++
     // Classifiy again!
     classifyVideo();
 }
