@@ -59,7 +59,7 @@ function getVideoDimension(){
 }
 
 function setNumberDisplay(number, message){
-    document.getElementById('numberDisplay').innerHTML = "0" + number;
+    document.getElementById('numberDisplay').innerHTML = number > 9 ? "" + number: "0" + number;
     document.getElementById('numberComment').innerHTML = message;
 }
 

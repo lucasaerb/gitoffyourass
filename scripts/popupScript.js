@@ -15,10 +15,12 @@ const initTime = () => {
     const h = parseInt(localStorage.getItem('hours'),10) || 0
     const m = parseInt(localStorage.getItem('minutes'),10) || 0
     const s = parseInt(localStorage.getItem('seconds'),10) || 0
-
-    hours.value = h === 0 ? parseInt(localStorage.getItem('permhours'),10) || 0 : h
-    minutes.value = m === 0 ? parseInt(localStorage.getItem('permminutes'),10) || 0 : m
-    seconds.value = s === 0 ? parseInt(localStorage.getItem('permseconds'),10) || 0 : s
+    const ph = parseInt(localStorage.getItem('permhours'),10)
+    const pm = parseInt(localStorage.getItem('permminutes'),10)
+    const ps = parseInt(localStorage.getItem('permseconds'),10)
+    hours.value = h === 0 && m === 0 && s === 0 ?  ph ? ph  > 9 ? ph : `0${ph}` : "00" : h > 9 ? ""+h: `0${h}`
+    minutes.value = h === 0 && m === 0 && s === 0  ? pm ? pm  > 9 ? pm : `0${pm}` : "00" : m > 9 ? ""+m: `0${m}`
+    seconds.value = h === 0 && m === 0 && s === 0 ?  ps ? ps  > 9 ? ps : `0${ps}` : "00" : s > 9 ? ""+s: `0${s}`
 }
 
 const initButtons = () => {
@@ -63,9 +65,12 @@ const init = () => {
 init()
 
 const updateTime = () => {
-    hours.value = parseInt(localStorage.getItem('hours'),10)
-    minutes.value = parseInt(localStorage.getItem('minutes'),10)
-    seconds.value = parseInt(localStorage.getItem('seconds'),10)
+    const h = parseInt(localStorage.getItem('hours'),10)
+    const m = parseInt(localStorage.getItem('minutes'),10)
+    const s = parseInt(localStorage.getItem('seconds'),10)
+    hours.value = h > 9 ? h : `0${h}`
+    minutes.value =  m > 9 ? m : `0${m}`
+    seconds.value =  s > 9 ? s : `0${s}`
 }
 
 
@@ -107,9 +112,12 @@ const onCancel = event => {
     start.className = "button"
     cancel.className = "button disabled"
     chrome.alarms.clear("second")
-    hours.value = parseInt(localStorage.getItem('permhours'),10)
-    minutes.value = parseInt(localStorage.getItem('permminutes'),10)
-    seconds.value = parseInt(localStorage.getItem('permseconds'),10)
+    const h = parseInt(localStorage.getItem('permhours'),10)
+    const m = parseInt(localStorage.getItem('permminutes'),10)
+    const s = parseInt(localStorage.getItem('permseconds'),10)
+    hours.value = h > 9 ? h : "0"+h
+    minutes.value = m > 9 ? m : "0"+m
+    seconds.value = s > 9 ? s : "0"+s
     localStorage.setItem('cancel', false)
 }
 
@@ -117,14 +125,14 @@ const onTimeChange = (value, hour, minute, second) => {
     const val = parseInt(value, 10)
     if (isNaN(val)|| val < 0){
         if(hour){
-            hours.value = 0
+            hours.value = "00"
         }
         else{
             if (minute){
-                minutes.value = 0
+                minutes.value = "00"
             }
             else{
-                seconds.value = 0
+                seconds.value = "00"
             }
         }
     }
@@ -143,14 +151,14 @@ const onTimeChange = (value, hour, minute, second) => {
     }
     else{
         if(hour){
-            hours.value = val
+            hours.value = val > 9 ? val : `0${val}`
         }
         else{
             if (minute){
-                minutes.value = val
+                minutes.value = val > 9 ? val : `0${val}`
             }
             else{
-                seconds.value = val
+                seconds.value = val > 9 ? val : `0${val}`
             }
         }
     }

@@ -5,17 +5,16 @@ const decrementTime = () => {
 
   localStorage.setItem('seconds',s <= 0 ? 0 : s - 1)
 
-  if(m > 0){
+  if(m > 0 && s === 0){
     localStorage.setItem('seconds', 59)
     localStorage.setItem('minutes', m-1)
     return;
   }
 
-  if(h > 0){
+  if(h > 0 && m === 0 && s === 0){
     localStorage.setItem('seconds', 59)
     localStorage.setItem('minutes', 59)
     localStorage.setItem('hours', h- 1)
-
     return;
   }
 }
