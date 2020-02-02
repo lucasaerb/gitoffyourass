@@ -1,6 +1,8 @@
 # git off your ass
 Time for squats with Shia LaBeouf and AI!! ML Image Recognition using Google's Teachable Machine
 
+A HACKUCI 2020 submission.
+
 ## Inspiration
 In the modern era of extreme developer laziness and muscular atrophy, we were inspired to **move our butts.**
 
