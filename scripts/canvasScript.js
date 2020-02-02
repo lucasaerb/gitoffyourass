@@ -158,13 +158,14 @@ function gotResult(error, results) {
 
     updateData(label)
 
-    if(counter === 25){
+    if(counter === 20){
         counter = 0
-        if(data.standing >= 10 && data.misc <= 5 && data.sitting >= 10){
+        if(data.squat >= 12){
             console.log("Its a squat!!")
             squats--
-            setNumberDisplay(10, `${squats} left`)
+            setNumberDisplay(squats, `squats left`)
             vid.src = `assets/video/shia${squats}.mp4`
+            vid.play();
         }
         console.log(data)
         data = emptyData()
