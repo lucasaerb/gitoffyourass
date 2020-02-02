@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "moveNow",
-    "version": "0.1",
-    "description": "This forces you to workout!",
+    "name": "git off your ass",
+    "version": "1.0",
+    "description": "Time for squats with Shia LaBeouf!",
     "icons": { 
       "16": "assets/img/favicon-16.png",
       "48": "assets/img/favicon-48.png",
@@ -17,7 +17,7 @@
       "http://*/"
     ],
     "browser_action": {
-      "default_title": "moveNow",      
+      "default_title": "git off your ass",      
       "default_popup": "popup.html"
      },
      "content_scripts": [
@@ -34,9 +34,11 @@
     },
     "web_accessible_resources": [
       "scripts/canvasScript.js",
-      "libraries/p5.dom.min.js", 
       "libraries/p5.min.js",
-      "libraries/ml5.min.js"
+      "libraries/p5.dom.min.js", 
+      "libraries/p5.sound.min.js",
+      "libraries/ml5.min.js",
+      "libraries/confetti.min.js"
     ],
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'" 
   }

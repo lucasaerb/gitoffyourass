@@ -84,13 +84,13 @@ body{
     /* align-items: stretch; */
     /* flex-grow: 3; */
     /* display: flex; */
-    /* background-color: var(--mainWhite); */
+    background-color: var(--offWhite);
 
 
     width: 80%;
     height: 90%;
-    
-    max-height: 777px;
+
+    max-height: 761px;
     min-width: 600px;
     justify-content: center;
     align-items: center;
@@ -101,13 +101,14 @@ body{
     display: flex;
 
     flex-direction: column;
+    justify-content: center;
     height: 90%;
     width: 30%;
     min-width: 300px;
 
     background-color: var(--white);
 
-    justify-content: space-around;
+    
     align-items: center;
 
 }
@@ -137,6 +138,8 @@ body{
     width: 95%;
     /* height: 45%; */
     /* height: 50%; */
+    border: 2px solid var(--grey1);
+    border-radius: 10px;
     flex-grow: 1;
 }
 
@@ -153,11 +156,13 @@ body{
 #numberDisplay {
     font-size: 15vw;
     font-family: sans-serif;
+    color: var(--black);
 }
 
 #numberComment {
     font-size: 3vw;
     font-weight: 500;
+    color: var(--black);
 }
 
 .margin {

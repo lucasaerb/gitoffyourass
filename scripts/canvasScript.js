@@ -14,13 +14,14 @@ let height;
 let width;
 let ratio = 0.75;
 
+let song;
 let vid;
 let vidHeight;
 let vidWidth;
 
 let shiaCount = 0;
 
-let squats = 10
+let squats = 1
 
 let counter = 0
 
@@ -54,7 +55,7 @@ function getCanvasDimension(){
 }
 
 function getVideoDimension(){
-    vidWidth = document.getElementById('rightVideo').clientWidth * 1.8 - 25;
+    vidWidth = document.getElementById('rightVideo').clientWidth * 2 - 25;
     vidHeight = width * ratio;
 }
 
@@ -65,10 +66,11 @@ function setNumberDisplay(number, message){
 
 function preload() {
     classifier = ml5.imageClassifier(imageModelURL + 'model.json');
+    song = loadSound('assets/sound/hooray.mp3');
 }
 
 function setup() {
-
+    confetti.speed = 3;
     getCanvasDimension();
     var myCanvas = createCanvas(width, height);
     myCanvas.parent("canvas");
@@ -98,7 +100,7 @@ function setup() {
 
 function vidLoad() {
     vid.loop();
-    const soundLevel = parseInt(localStorage.getItem('soundLevel'),10) 
+    const soundLevel = parseInt(localStorage.getItem('soundLevel'),10);
     if (isNaN(soundLevel)){
         vid.volume(0.5)
     }
@@ -137,6 +139,14 @@ function classifyVideo() {
     vid.volume((parseInt(localStorage.getItem('soundLevel'),10)/100).toFixed(1))
 }
 
+function playHooray(){
+    if (song.isPlaying()) {
+        song.stop();
+    } else {
+        song.play();
+    }
+}
+
 // When we get a result
 function gotResult(error, results) {
     // If there is an error
@@ -154,8 +164,15 @@ function gotResult(error, results) {
         chrome.runtime.sendMessage({done:true})
 
         //Wait for confetti
-        setTimeout(function(){}, 1000)
-        window.close()
+        // makeConfetti();
+        // vid.pause();
+        window.playHooray();
+        confetti.start();
+
+        setTimeout(function(){
+            window.close()
+        }, 15000)
+        
     }
 
     if(counter === 20){
@@ -169,7 +186,7 @@ function gotResult(error, results) {
             vid.src = `assets/video/shia${squats}.mp4`
             vid.play();
         }
-        console.log(data)
+        console.log(data);
         data = emptyData()
     }
     counter++;
